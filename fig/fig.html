@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation Activity Diagram</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dagre-d3@0.6.4/dist/dagre-d3.min.js"></script>
+    <style>
+        .node rect {
+            stroke: #333;
+            fill: #fff;
+        }
+        .edgePath path {
+            stroke: #333;
+            fill: none;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <svg width="960" height="600"></svg>
+
+    <script>
+        // Create a new graph
+        const g = new dagreD3.graphlib.Graph().setGraph({});
+
+        // Define nodes
+        g.setNode("Start", { label: "Start", shape: "ellipse" });
+        g.setNode("UserInteraction", { label: "User Interaction:\n(Login, Signup, Explore Popular Books, Recommend Books,\nAbout Us, Developers, Forgot Password)", shape: "rect" });
+        g.setNode("Login", { label: "Login (/login)", shape: "diamond" });
+        g.setNode("Signup", { label: "Signup (/signup)", shape: "diamond" });
+        g.setNode("Explore", { label: "Explore Popular Books (/second)", shape: "rect" });
+        g.setNode("RecommendUI", { label: "Recommend UI (/recommend)", shape: "rect" });
+        g.setNode("RecommendBooks", { label: "Recommend Books (/recommend_books)", shape: "diamond" });
+        g.setNode("End", { label: "End", shape: "ellipse" });
+
+        // Login process
+        g.setNode("LoginDetails", { label: "Collect email & password\nValidate credentials", shape: "rect" });
+        g.setNode("LoginSuccess", { label: "Successful login:\nSet session variables\nRedirect to /second", shape: "rect" });
+        g.setNode("LoginFail", { label: "Unsuccessful login:\nShow error\nRedirect to login/signup", shape: "rect" });
+
+        // Signup process
+        g.setNode("SignupDetails", { label: "Collect user details\nValidate form data\nInsert into DB", shape: "rect" });
+        g.setNode("SignupSuccess", { label: "Successful signup:\nRedirect to login", shape: "rect" });
+
+        // Explore Popular Books
+        g.setNode("RetrieveBooks", { label: "Retrieve book data\nRender 'second.html'", shape: "rect" });
+
+        // Recommend Books
+        g.setNode("GetUserInput", { label: "Get user input (book title)", shape: "rect" });
+        g.setNode("CalculateSimilarity", { label: "Calculate similarity\nFind top 5 similar books", shape: "rect" });
+        g.setNode("RenderRecommendations", { label: "Render 'recommend.html'\nwith recommended books", shape: "rect" });
+
+        // Connect nodes
+        g.setEdge("Start", "UserInteraction");
+        g.setEdge("UserInteraction", "Login");
+        g.setEdge("UserInteraction", "Signup");
+        g.setEdge("UserInteraction", "Explore");
+        g.setEdge("UserInteraction", "RecommendUI");
+        g.setEdge("Login", "LoginDetails");
+        g.setEdge("LoginDetails", "LoginSuccess");
+        g.setEdge("LoginDetails", "LoginFail");
+        g.setEdge("Signup", "SignupDetails");
+        g.setEdge("SignupDetails", "SignupSuccess");
+        g.setEdge("Explore", "RetrieveBooks");
+        g.setEdge("RecommendUI", "RecommendBooks");
+        g.setEdge("RecommendBooks", "GetUserInput");
+        g.setEdge("GetUserInput", "CalculateSimilarity");
+        g.setEdge("CalculateSimilarity", "RenderRecommendations");
+        g.setEdge("RenderRecommendations", "End");
+        g.setEdge("LoginSuccess", "End");
+        g.setEdge("SignupSuccess", "End");
+        g.setEdge("RetrieveBooks", "End");
+
+        // Render the graph
+        const render = new dagreD3.render();
+        const svg = d3.select("svg");
+        const svgGroup = svg.append("g");
+        render(svgGroup, g);
+
+        // Adjust SVG size
+        const xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
+        svgGroup.attr("transform", `translate(${xCenterOffset}, 20)`);
+        svg.attr("height", g.graph().height + 40);
+    </script>
+</body>
+</html>

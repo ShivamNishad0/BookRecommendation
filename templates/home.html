@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right,white,rgb(123, 123, 244));
+    background-size: 200% 200%;
+    animation: gradientAnimation 11s ease infinite;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+        /* Inline CSS for styling the Home Page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+
+        .home-container {
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #results p {
+            padding: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .cursor {
+        position: fixed;
+        width: 15px; /* Slightly larger for more visibility */
+        height: 15px;
+        border-radius: 50%;
+        background: rgb(125, 123, 255); /* Light blue color */
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.2s ease, background 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 0 5px rgba(0, 174, 255, 0.6); /* Glowing effect */
+        }
+
+        .cursor::after {
+            content: '';
+            position: absolute;
+            width: 50px; /* Ripple size */
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 174, 255, 0.3); /* Lighter blue for ripple */
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease-out;
+            pointer-events: none; /* Prevent interaction */
+            z-index: -1; /* Behind the cursor */
+        }
+
+
+        .container {
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */
+        padding: 20px;
+        border-radius: 10px;
+        position: relative; /* Position for hover message */
+        }
+
+
+        @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+            }
+        40% {
+            transform: translateY(-20px);
+            }
+        60% {
+            transform: translateY(-10px);
+            }
+        }
+
+        .hover-message {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%) scale(0); /* Initially scale to 0 */
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Transition for opacity and scaling */
+            opacity: 0; /* Initially hidden */
+        }
+
+        .container:hover .hover-message {
+            display: block; /* Make it block to apply transitions */
+            opacity: 1; /* Fade in */
+            transform: translateX(-50%) scale(1); /* Scale up */
+        }
+
+        .logo {
+        width: 150px;
+        height: auto; /* Maintain aspect ratio */
+        }
+
+        .bounce {
+            display: inline-block;
+            animation: bounce 1s infinite;
+        }
+
+        .cursor.ripple::after {
+            transform: translate(-50%, -50%) scale(1); /* Activate ripple */
+            opacity: 0; /* Fade out effect */
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Combine transition */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" onclick="searchBooks()">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Studying Student" alt="Studying Student" class="logo" style="width: 150px; height: auto;">
+        <h1>Welcome to Our Book World!</h1>
+        <h2>
+            Discover Amazing <span class="bounce">Books</span>!
+        </h2>
+     <div class="hover-message">Click on me to go!</div>
+    </div>
+
+    <script>
+        function searchBooks(){
+            window.location.href = "/login";
+        }
+        
+        document.addEventListener("mousemove", (e) => {
+        const cursor = document.createElement("div");
+        cursor.classList.add("cursor");
+        document.body.appendChild(cursor);
+        
+        cursor.style.left = e.pageX + 'px';
+        cursor.style.top = e.pageY + 'px';
+
+        // Add ripple effect class
+        setTimeout(() => {
+            cursor.classList.add("ripple");
+        }, 10);
+
+        // Remove ripple effect after animation
+        setTimeout(() => {
+            cursor.classList.remove("ripple");
+        }, 500);
+
+        // Remove previous cursor element
+        setTimeout(() => {
+            cursor.remove();
+        }, 100);
+    });
+
+    </script>
+</body>
+</html>

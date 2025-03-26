@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style type="text/css">
+        body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right,white,rgb(123, 123, 244));
+    background-size: 300% 300%; /* Allow for animation */
+    animation: gradientAnimation 15s ease infinite; /* Animate the gradient */
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.5s ease;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: center;
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+    /* this is use to so effect like typing*/  */
+
+
+.header-text {
+    font-size: 1.5em;
+    margin: 0 10px; /* Space around the text */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition for opacity and movement */
+}
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.5em;
+    background: #5cb85c; /* Cursor color */
+    animation: blink 1s step-end infinite; /* Blinking effect */
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+
+.visible {
+    opacity: 1; /* Make text visible */
+}
+
+.hidden {
+    opacity: 0; /* Hide text */
+    transform: translateY(-10px); /* Move text up slightly when hiding */
+}
+
+button {
+    margin-bottom: 10px; /* Space between button and header */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: 35%;
+    width: 90%;
+    max-width: 400px;
+    animation: fadeIn 1s ease;
+}
+
+#search
+{
+    height: 20px;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+select, input[type="text"] {
+    padding: 12px;
+    border: 2px solid #5cb85c;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1em;
+}
+
+select:focus, input[type="text"]:focus {
+    border-color: #4cae4c;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #4cae4c;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* for recommend books that shows on browser */
+.book-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.book-box {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.book-box img {
+    max-width: 100%;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.book-box img:hover {
+    transform: scale(1.05);
+}
+
+
+.heading{
+    margin-left: 50px;
+}
+
+
+/* for the top nav bar  */
+nav {
+    background-color: #f8f8f8;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.nav-links {
+    display: inline-block;
+}
+
+.nav-links a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+#genre{
+    cursor:pointer;
+}
+
+
+.dark{
+    background-color: black;
+    color: white;
+
+}
+.light{
+    background-color: white;
+    color: black;
+}
+
+
+
+body {
+            background-color: #ffffff;
+        }
+        .text-white {
+            color: #0a0a0a00;
+        }
+        .box {
+            padding: 20px;
+        }
+        .card {
+            background-color: #f4f2f2;
+            border: none;
+        }
+        .card img {
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="nav-links">
+                <a href="/second">Home</a>
+                <a href="/recommend">Recommendations</a> <!-- Updated to anchor link -->
+                <a href="/about">About Us</a>
+                <a href="/dev">Developer</a>
+                <button id="mode">Change Mode</button>
+            </div>
+        </div>
+    </nav>
+    
+    <header>
+        <div class="header-wrapper">
+            <span class="bracket"></span>
+            <h1 id="headerText" class="header-text">Book Recommendation</h1>
+            <span class="bracket"></span>
+        </div>
+    </header>
+
+    <main>
+        
+        <div class="box">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- <h1 class="text-white text-center" style="font-size:50px">Top 50 Books</h1> -->
+                </div>
+            </div>
+
+            <!-- <div class="container"> -->
+                <h1 class="text-white text-center" style="font-size:50px">Recommend Books</h1>
+                    <form action="/recommend_books" method="POST">
+                        <input name="user_input" type="text" class="form-control "><br>
+                        <input type="submit" class="btn btn-lg btn-warning"> <br>
+                    </form>
+                    {% if data %}
+        <div class="row">
+            {% for i in data %}
+                <div class="col-md-3" style="margin-top: 20px;">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img class="card-img-top" src="{{ i[2] }}" alt="Book Image">
+                            <h3 class="text-black">{{ i[0] }}</h3>
+                            <p class="text-black">{{ i[1] }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+                    
+            
+            <!-- </div> -->
+            
+
+            
+                
+                </div>
+            </div>
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+
+        <section class="book-gallery" id="bookGallery"> <!-- Added ID for targeting -->
+            <!-- Book boxes will be dynamically generated here -->
+            
+
+        </section>
+    </main>
+    <script>
+    function searchBooks(){
+        window.location.href = "/second";
+    }
+
+    function about(){
+        window.location.href = "/about";
+    }
+    function dev(){
+        window.location.href = "/dev";
+    }
+
+    document.getElementById("mode").addEventListener("click", function() {
+            document.body.classList.toggle("dark");
+        });
+
+    
+    </script>
+    
+</body>
+</html>

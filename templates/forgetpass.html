@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, white, rgb(123, 123, 244));
+            background-size: 200% 200%;
+            animation: gradientAnimation 11s ease infinite;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #333333;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .links {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .links a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 14px;
+            margin: 0 10px;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Forgot Password</h2>
+        <form id="forgotPasswordForm">
+            <label for="email">Enter your email</label>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <button type="submit">Reset Password</button>
+        </form>
+        <div class="links">
+            <a href="/">Back to Login</a>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission for password reset
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+
+            // Simulate email sending (replace this with backend API call)
+            alert(`If an account with email ${email} exists, you will receive a password reset link.`);
+            
+            // Optionally redirect back to the login page
+            window.location.href = "/";
+        });
+    </script>
+</body>
+</html>

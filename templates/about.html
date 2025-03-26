@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to right, white, rgb(123, 123, 244));
+            background-size: 300% 300%;
+            animation: gradientAnimation 15s ease infinite;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        nav {
+            background-color: #f8f8f8;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .nav-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover { text-decoration: underline; }
+
+        #mode {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #mode:hover { background-color: #4cae4c; }
+
+        .about-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .about-container h1, .about-container h2 {
+            color: #5cb85c;
+        }
+
+        .about-container p {
+            font-size: 1em;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .team-section, .tech-section {
+            margin-top: 20px;
+        }
+
+        .tech-stack {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-stack li {
+            background: #f4f2f2;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .dark {
+            background-color: black;
+            color: white;
+        }
+
+        .light {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        
+        <div class="nav-links">
+            <a href="/second">Home</a>
+            <a href="/recommend">Recommendations</a> <!-- Updated to anchor link -->
+                <a href="/about">About Us</a>
+                <a href="/dev">Developer</a>
+            <button id="mode">Change Mode</button>
+        </div>
+    </nav>
+    
+
+    <div class="about-container">
+        <h1>About Us</h1>
+        <p>Welcome to the Book Recommendation App! Our mission is to help book lovers find the best books based on their preferences and ratings from other readers. Whether you're into fiction, non-fiction, fantasy, or biographies, our app is here to make your next book selection easier and more enjoyable.</p>
+
+        <section class="team-section">
+            <h2>Our Team</h2>
+            <p><strong>Kartikay Srivastava</strong> </p>
+            <p><strong>Shivam Nishad</strong> </p>
+            <p><strong>Yash Chaurasia</strong> </p>
+        </section>
+
+        <section class="tech-section">
+            <h2>Technology Stack</h2>
+            <p>We built this application using modern web technologies to ensure smooth performance and an enjoyable user experience.</p>
+            <ul class="tech-stack">
+                <li>Frontend: HTML, CSS, JavaScript, Bootstrap</li>
+                <li>Backend: Python (Flask/Django), REST APIs</li>
+                <li>Database: MySql</li>
+                <li>Data Processing: Pandas, Scikit-Learn (for recommendations)</li>
+                <li>Deployment: Heroku/AWS</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        function searchBooks() { window.location.href = "/recommend"; }
+        function about() { window.location.href = "/about"; }
+        function dev(){
+        window.location.href = "/dev";
+    }
+
+        document.getElementById("mode").addEventListener("click", function() {
+            document.body.classList.toggle("dark");
+        });
+    </script>
+</body>
+</html>

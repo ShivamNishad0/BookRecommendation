@@ -1,0 +1,8 @@
+Mudules :
+
+Data Collection and Preprocessing
+User Profile Management
+Recommendation Engine
+Search and Browsing Module
+Backend and Database Management
+User Interface (UI) Module
