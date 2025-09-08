@@ -5,21 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Recommendation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style type="text/css">
-        body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(to right,white,rgb(123, 123, 244));
-    background-size: 300% 300%; /* Allow for animation */
-    animation: gradientAnimation 15s ease infinite; /* Animate the gradient */
-    color: #333;
-    font-family: 'Arial', sans-serif;
-    transition: background-color 0.5s ease;
-}
 
 @keyframes gradientAnimation {
     0% {
@@ -263,15 +250,13 @@ body {
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            <div class="nav-links">
-                <a href="/second">Home</a>
-                <a href="/recommend">Recommendations</a> <!-- Updated to anchor link -->
-                <a href="/about">About Us</a>
-                <a href="/dev">Developer</a>
-                <button id="mode">Change Mode</button>
-            </div>
+    <nav class="nav">
+        <div class="nav-links">
+            <a href="/second">Home</a>
+            <a href="/recommend">Recommendations</a>
+            <a href="/about">About Us</a>
+            <a href="/dev">Developer</a>
+            <button id="mode" class="btn">Change Mode</button>
         </div>
     </nav>
     
