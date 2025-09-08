@@ -16,7 +16,6 @@ similarity_score=pickle.load(open('similarity_score.pkl','rb'))
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-
 # MySQL Configurations
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -154,5 +153,5 @@ def recommend_book():
 
 if __name__ == '__main__':
     import os
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port, debug=True)
